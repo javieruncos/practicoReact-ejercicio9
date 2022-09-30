@@ -3,9 +3,9 @@ import React from 'react';
 import { Container } from 'react-bootstrap';
 import CardsPaciente from './CardsPaciente';
 
-const Citas = ({arregloCitas}) => {
+const Citas = ({arregloCitas,nuevaMascota}) => {
     return (
-        <secction>
+         <>
         <div>
             <h3 className='text-center mt-5'>numero de citas  ({arregloCitas.length})</h3>
         </div>
@@ -13,13 +13,13 @@ const Citas = ({arregloCitas}) => {
 
            {
                  
-             arregloCitas.map((item,indice)=><CardsPaciente key={indice} nombre={item.nombre} dueño={item.duenio} sintoma={item.sintomas} fecha={item.fecha}  hora={item.hora}/>)
+             arregloCitas.map((item,indice)=><CardsPaciente key={indice} nombre={item.nombre} dueño={item.duenio} sintoma={item.sintomas} fecha={item.fecha}  hora={item.hora} nuevaMascota={nuevaMascota}/>)
 
 
 
            }  
         </Container>
-        </secction>
+        </>
     );
 };
 

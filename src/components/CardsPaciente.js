@@ -3,7 +3,7 @@ import '../style/CardAvatar.css'
 
 
 
-const CardsPaciente = ({nombre,duenio,sintoma,fecha,hora}) => {
+const CardsPaciente = ({nombre,duenio,sintoma,fecha,hora, nuevaMascota}) => {
   return (
     <div className="card col-12 col-md-4">
       <Card>
@@ -16,35 +16,11 @@ const CardsPaciente = ({nombre,duenio,sintoma,fecha,hora}) => {
                     <h5>{nombre}</h5>
                 </div>
             </div>
-         <Form>
-         <Form.Group className="d-flex my-3 justify-content-center">
-              <Form.Label className="mt-2  w-25">Fecha</Form.Label>
-              <Form.Control
-                type="date"
-                placeholder="Nombre de Mascota"
-                className="w-50"
-                value={fecha}
-              />
-            </Form.Group>
-         <Form.Group className="d-flex my-3 justify-content-center">
-              <Form.Label className="mt-2  w-25">Hora</Form.Label>
-              <Form.Control
-                type="time"
-                placeholder="Nombre de Mascota"
-                className="w-50"
-                value={hora}
-              />
-            </Form.Group>
-         <Form.Group className="d-flex my-3 justify-content-center">
-              <Form.Label className="mt-2  w-25">Sintomas</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nombre de Mascota"
-                className="w-50"
-                value={sintoma}
-              />
-            </Form.Group>
-         </Form>
+           <ul className="text-center">
+            <li className="my-5 ">Fecha :  {fecha}</li>
+            <li className="my-5 ">Hora :  {hora}</li>
+            <li className="my-5 ">Sintomas :  {sintoma}</li>
+           </ul>
           <Button variant="primary" className="ms-5">Go somewhere</Button>
         </Card.Body>
       </Card>
