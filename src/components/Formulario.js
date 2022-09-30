@@ -1,88 +1,60 @@
 import { useState } from "react";
-import { Form ,Button} from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import Citas from "./Citas";
 
 const Formulario = () => {
+  const [nombreMascota, setNombreMascota] = useState("");
+  const [nombreDuenio, setNombreDuenio] = useState("");
+  const [nombreSintomas, setSintomas] = useState("");
+  const [Fecha, setFecha] = useState("");
+  const [Hora, setHora] = useState("");
+  const [arregloCitas, seArregloCitas] = useState([]);
 
-    const [nombreMascota, setNombreMascota] = useState("")
-    const [nombreDuenio, setNombreDuenio] = useState("")
-    const [nombreSintomas, setSintomas] = useState("")
-    const [arregloCitas, seArregloCitas] = useState([])
-
-   const nuevaMascota = (e)=>{
-    e.preventDefault()
+  const nuevaMascota = (e) => {
+    e.preventDefault();
     let cita = {
-     nombre:nombreMascota,
-     duenio:nombreDuenio,
-     sintomas:nombreSintomas
-    }
-    seArregloCitas([...arregloCitas,cita])
-    setNombreMascota("")
-    setNombreDuenio("")
-    setSintomas("")
-   }
+      nombre: nombreMascota,
+      duenio: nombreDuenio,
+      sintomas: nombreSintomas,
+      fecha: Fecha,
+      hora: Hora,
+    };
+    seArregloCitas([...arregloCitas, cita]);
+    setNombreMascota("");
+    setNombreDuenio("");
+    setSintomas("");
+  };
 
   return (
-    <div className="mt-4">
-      <div>
-        <div className="shadow py-4">
-          <h3 className="ms-3">Llenar el formulario para crear una cita</h3>
-        </div>
-        <Form className="d-flex shadow-lg " onSubmit={nuevaMascota}>
-          <Form.Group
-            className="mb-3 d-flex flex-column w-75 ms-3"
-          >
-            <Form.Group className="d-flex my-3">
-              <Form.Label className="mt-2  w-25">Nombre de Mascota</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nombre de Mascota"
-                className="w-50"
-                value={nombreMascota}
-                onChange={(e)=> setNombreMascota(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="d-flex my-3">
-              <Form.Label className="mt-2  w-25">Nombre de Dueño</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Nombre del Dueño"
-                className="w-50"
-                value={nombreDuenio}
-                onChange={(e)=> setNombreDuenio(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="d-flex my-3">
-              <Form.Label className="mt-2  w-25">Fecha</Form.Label>
-              <Form.Control
-                type="date"
-                placeholder="Enter email"
-                className="w-25"
-              />
-              <Form.Label className="mt-2 mx-1">Hora</Form.Label>
-              <Form.Control
-                type="time"
-                placeholder="Enter email"
-                className="w-25"
-              />
-            </Form.Group>
-            <Form.Group className="d-flex my-3">
-              <Form.Label className="mt-2  w-25">Sintomas</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Sintomas"
-                className="w-50"
-                value={nombreSintomas}
-                onChange={(e)=> setSintomas(e.target.value)}
-              />
-            </Form.Group>
-              <Form.Group className="text-center py-3">
-              <Button type="submit">Agregar cita</Button>
-              </Form.Group>
-          </Form.Group>
-        </Form>
-        <Citas arregloCitas={arregloCitas}/>
+    <div>
+      <div className="shadow py-4">
+        <h3 className="ms-3">Llenar el formulario para crear una cita</h3>
       </div>
+      <form onSubmit={nuevaMascota}>
+        <div className="row">
+          <div className="col-12 col-md-3 d-flex flex-column">
+            <label className="my-3">Nombre de mascota</label>
+            <label className="my-3">Nombre de dueño</label>
+            <label className="my-3">Fecha y hora</label>
+            <label className="my-3">Sintomas</label>
+          </div>
+          <div className="col-12 col-md-9 d-flex flex-column">
+            <input type="text" className="form-control my-2" />
+            <input type="text" className="form-control my-2" />
+            <div className="d-flex">
+              <input type="date" className="w-100 form-control my-2" />
+              <input type="time" className="w-100 form-control my-2" />
+            </div>
+            <input type="text" className="form-control my-2" />
+          </div>
+        </div>
+        <div className="d-flex justify-content-center mt-4">
+          <Button type="submit" className="w-25">
+            Agregar cita
+          </Button>
+        </div>
+      </form>
+      <Citas arregloCitas={arregloCitas} />
     </div>
   );
 };
