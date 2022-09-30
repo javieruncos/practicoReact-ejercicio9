@@ -1,14 +1,25 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { Button } from "react-bootstrap";
 import Citas from "./Citas";
 
 const Formulario = () => {
+
+   const listaCitasLocal = JSON.parse(localStorage.getItem("listaCitas"))||[];
+
+
   const [nombreMascota, setNombreMascota] = useState("");
   const [nombreDuenio, setNombreDuenio] = useState("");
   const [nombreSintomas, setSintomas] = useState("");
   const [fecha, setFecha] = useState("");
   const [Hora, setHora] = useState("");
-  const [arregloCitas, seArregloCitas] = useState([]);
+  const [arregloCitas, setArregloCitas] = useState(listaCitasLocal);
+
+
+
+  useEffect(() => {
+     localStorage.setItem("listaCitas", JSON.stringify(arregloCitas))
+  }, [arregloCitas])
+  
 
   const nuevaMascota = (e) => {
     e.preventDefault();
@@ -19,7 +30,7 @@ const Formulario = () => {
       fecha: fecha,
       hora: Hora,
     };
-    seArregloCitas([...arregloCitas, cita]);
+    setArregloCitas([...arregloCitas, cita]);
     setNombreMascota("");
     setNombreDuenio("");
     setSintomas("");
@@ -27,20 +38,28 @@ const Formulario = () => {
     setHora("")
   };
 
+
+   const borrarCita = (nombre)=>{
+     let nuevoArreglo = arregloCitas.filter((item) => item !== nombre)
+     setArregloCitas(nuevoArreglo)
+   }
+
+   
+
   return (
     <div>
-      <div className="shadow py-4">
+      <div className="shadow py-4 my-5">
         <h3 className="ms-3">Llenar el formulario para crear una cita</h3>
       </div>
       <form onSubmit={nuevaMascota}>
         <div className="row">
-          <div className="col-12 col-md-3 d-flex flex-column">
+          <div className="col-6 col-md-3 d-flex flex-column">
             <label className="my-3">Nombre de mascota</label>
             <label className="my-3">Nombre de dueño</label>
             <label className="my-3">Fecha y hora</label>
             <label className="my-3">Sintomas</label>
           </div>
-          <div className="col-12 col-md-9 d-flex flex-column">
+          <div className="col-6 col-md-9 d-flex flex-column">
             <input 
              type="text" 
              className="form-control my-2" 
@@ -81,7 +100,7 @@ const Formulario = () => {
           </Button>
         </div>
       </form>
-      <Citas arregloCitas={arregloCitas} nuevaMascota={nuevaMascota}/>
+      <Citas arregloCitas={arregloCitas} nuevaMascota={nuevaMascota} borrarCita={borrarCita}/>
     </div>
   );
 };
